@@ -1,4 +1,4 @@
-import Navbar from "../components/organisms/navbar";
+import Navbar from "../components/organisms/Navbar";
 import Hero from "../components/organisms/Hero";
 import About from "../components/organisms/About";
 import Footer from "../components/organisms/Footer";
