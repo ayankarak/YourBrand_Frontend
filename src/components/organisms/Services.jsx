@@ -1,4 +1,5 @@
-import Button from "../atoms/Button";
+
+import ServiceCard from "../molecules/ServiceCard";
 
 const services = [
   {
@@ -38,32 +39,12 @@ function Services() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <div
+            <ServiceCard
               key={service.title}
-              className="group overflow-hidden rounded-2xl border border-gray-100 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
-            >
-              <img
-                src={service.image}
-                alt={service.title}
-                className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-              />
-
-              <div className="p-5">
-                <h3 className="text-lg font-bold text-green-950">
-                  {service.title}
-                </h3>
-
-                <p className="mt-2 text-sm text-gray-500">
-                  {service.description}
-                </p>
-
-                <div className="mt-4">
-                  <Button href="#contact" variant="secondary">
-                    Learn More
-                  </Button>
-                </div>
-              </div>
-            </div>
+              title={service.title}
+              description={service.description}
+              image={service.image}
+            />
           ))}
         </div>
       </div>

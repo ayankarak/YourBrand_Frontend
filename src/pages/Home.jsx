@@ -5,6 +5,7 @@ import Footer from "../components/organisms/Footer";
 import Statistics from "../components/organisms/Statistics";
 import Services from "../components/organisms/Services";
 import Reveal from "../components/molecules/Reveal";
+import Highlights from "../components/organisms/Highlights";
 
 function Home() {
     return (
@@ -12,6 +13,8 @@ function Home() {
             <Navbar />
 
             <Hero />
+
+            <Highlights />
 
             <Reveal>
                 <About />
