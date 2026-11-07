@@ -16,7 +16,7 @@ function Footer() {
     { name: "Contact", href: "#contact" },
   ];
 
-  const resources = ["Blog","FAQs","Support","Privacy Policy",];
+  const resources = ["Blog", "FAQs", "Support", "Privacy Policy"];
 
   const socialIcons = [
     { icon: FaFacebookF, href: "https://facebook.com", label: "Facebook" },
@@ -42,7 +42,7 @@ function Footer() {
 
           <a
             href="mailto:hello@example.com"
-            className="rounded-full bg-lime-400 px-6 py-3 font-bold text-green-950 transition hover:bg-lime-300"
+            className="rounded-full bg-lime-400 px-6 py-3 font-bold text-green-950 transition-all duration-300 hover:scale-105 hover:bg-lime-300 hover:shadow-lg"
           >
             Contact Us →
           </a>
@@ -60,7 +60,7 @@ function Footer() {
           <div>
             <a
               href="#home"
-              className="flex items-center gap-2 text-xl font-bold"
+              className="flex items-center gap-2 text-xl font-bold transition-all duration-300 hover:scale-105 hover:text-lime-400"
             >
               <Leaf className="h-7 w-7 fill-lime-400 text-lime-400" />
               YourBrand
@@ -82,7 +82,7 @@ function Footer() {
               <a
                 key={link.name}
                 href={link.href}
-                className="mb-3 block text-sm text-gray-400 transition hover:text-lime-400"
+                className="mb-3 block origin-left text-sm text-gray-400 transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-lime-400"
               >
                 {link.name}
               </a>
@@ -99,7 +99,7 @@ function Footer() {
               <a
                 key={item}
                 href="#contact"
-                className="mb-3 block text-sm text-gray-400 transition hover:text-lime-400"
+                className="mb-3 block origin-left text-sm text-gray-400 transition-all duration-300 hover:translate-x-2 hover:scale-105 hover:text-lime-400"
               >
                 {item}
               </a>
@@ -120,7 +120,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="rounded-full bg-white/10 p-3 transition hover:bg-lime-400 hover:text-green-950"
+                  className="rounded-full bg-white/10 p-3 text-white transition-all duration-300 hover:scale-125 hover:bg-lime-400 hover:text-green-950 hover:shadow-lg"
                 >
                   <Icon size={18} />
                 </a>
@@ -140,8 +140,20 @@ function Footer() {
             © 2026 YourBrand. All rights reserved.
           </p>
 
-          <p className="mt-2 sm:mt-0">
-            Privacy Policy | Terms of Service
+          <p className="mt-2 flex justify-center gap-2 sm:mt-0">
+            <a
+              href="#contact"
+              className="transition-all duration-300 hover:scale-105 hover:text-lime-400"
+            >
+              Privacy Policy
+            </a>
+            |
+            <a
+              href="#contact"
+              className="transition-all duration-300 hover:scale-105 hover:text-lime-400"
+            >
+              Terms of Service
+            </a>
           </p>
         </div>
       </footer>

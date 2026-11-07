@@ -1,89 +1,82 @@
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 import { Users, Trophy, Target } from "lucide-react";
+import { useInView } from "framer-motion";
 
 const stats = [
-  {
-    icon: Users,
-    target: 10000,
-    suffix: "+",
-    label: "Happy Clients",
-  },
-  {
-    icon: Trophy,
-    target: 500,
-    suffix: "+",
-    label: "Projects Delivered",
-  },
-  {
-    icon: Target,
-    target: 98,
-    suffix: "%",
-    label: "Success Rate",
-  },
+  { icon: Users, number: 10000, suffix: "+", label: "Happy Clients" },
+  { icon: Trophy, number: 500, suffix: "+", label: "Projects Delivered" },
+  { icon: Target, number: 98, suffix: "%", label: "Success Rate" },
 ];
 
-function StatItem({ icon: Icon, target, suffix, label }) {
+function StatItem({ icon: Icon, number, suffix, label }) {
   const [count, setCount] = useState(0);
-
   const ref = useRef(null);
 
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.5,
-  });
+  const isInView = useInView(ref, { once: false });
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView) {
+      setCount(0);
+      return;
+    }
 
-    const duration = 3000;
     let animationFrame;
-    let startTime;
+    let interval;
+    let startTime = null;
 
-    const updateCount = (currentTime) => {
-      if (!startTime) startTime = currentTime;
+    const duration = 2000;
 
-      const elapsed = currentTime - startTime;
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
 
-      const progress = Math.min(elapsed / duration, 1);
+      const progress = Math.min(
+        (timestamp - startTime) / duration,
+        1
+      );
 
-      // Smooth easing effect
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
 
-      setCount(Math.floor(easedProgress * target));
+      setCount(Math.floor(number * easeOut));
 
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(updateCount);
+        animationFrame = requestAnimationFrame(animate);
       } else {
-        setCount(target);
+        setCount(number);
       }
     };
 
-    animationFrame = requestAnimationFrame(updateCount);
+    const startAnimation = () => {
+      cancelAnimationFrame(animationFrame);
+      startTime = null;
+      setCount(0);
+      animationFrame = requestAnimationFrame(animate);
+    };
 
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isInView, target]);
+    startAnimation();
 
-  const displayNumber =
-    target >= 10000 && count >= 1000
-      ? count === target
-        ? "10K+"
-        : `${(count / 1000).toFixed(1)}K+`
-      : `${count}${count === target ? suffix : ""}`;
+    interval = setInterval(startAnimation, 4000);
+
+    return () => {
+      clearInterval(interval);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [isInView, number]);
+
+  const formattedCount =
+    number === 10000 && count === number
+      ? "10K"
+      : count.toLocaleString("en-IN");
 
   return (
     <div ref={ref} className="text-center">
-      <Icon
-        className="mx-auto mb-2 text-green-800"
-        size={28}
-      />
+      <Icon className="mx-auto mb-3 h-8 w-8 text-green-700" />
 
-      <h3 className="text-2xl font-extrabold text-green-950">
-        {displayNumber}
+      <h3 className="text-3xl font-extrabold text-green-950">
+        {formattedCount}{suffix}
       </h3>
 
-      <p className="mt-1 text-xs text-gray-600 md:text-sm">
+      <p className="mt-2 text-sm text-gray-600">
         {label}
       </p>
     </div>
@@ -92,16 +85,13 @@ function StatItem({ icon: Icon, target, suffix, label }) {
 
 function Statistics() {
   return (
-    <section className="bg-white px-5 pb-12 md:px-12">
-      <div className="mx-auto grid max-w-7xl grid-cols-3 gap-3 rounded-2xl bg-lime-50 p-6">
-
-        {stats.map((stat) => (
-          <StatItem
-            key={stat.label}
-            {...stat}
-          />
-        ))}
-
+    <section className="bg-white px-5 py-12 md:px-12">
+      <div className="mx-auto max-w-7xl rounded-3xl bg-lime-50 px-6 py-10">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {stats.map((stat) => (
+            <StatItem key={stat.label} {...stat} />
+          ))}
+        </div>
       </div>
     </section>
   );
