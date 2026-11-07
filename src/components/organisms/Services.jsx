@@ -23,19 +23,21 @@ function Services() {
   return (
     <section id="services" className="bg-white px-5 py-12 md:px-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 text-center">
-          <p className="text-xs font-bold uppercase tracking-[3px] text-green-600">
+
+        <div className="mb-12 text-center">
+          <p className="text-sm font-bold uppercase tracking-[3px] text-green-600 md:text-base">
             What We Offer
           </p>
 
-          <h2 className="mt-2 text-4xl font-extrabold text-green-950">
+          <h2 className="mt-3 text-5xl font-extrabold text-green-950 md:text-6xl">
             Our Services
           </h2>
 
-          <p className="mt-2 text-gray-500">
+          <p className="mt-4 text-base text-gray-500 md:text-lg">
             Tailored solutions to meet your needs
           </p>
         </div>
+
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
