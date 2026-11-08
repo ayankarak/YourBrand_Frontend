@@ -52,9 +52,7 @@ function StatItem({ icon: Icon, number, suffix, label }) {
       setCount(0);
       animationFrame = requestAnimationFrame(animate);
     };
-
     startAnimation();
-
     interval = setInterval(startAnimation, 4000);
 
     return () => {
