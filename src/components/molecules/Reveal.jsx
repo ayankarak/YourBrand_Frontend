@@ -34,7 +34,9 @@ function Reveal({
       }}
       className={className}
     >
+
       {children}
+      
     </motion.div>
   );
 }
